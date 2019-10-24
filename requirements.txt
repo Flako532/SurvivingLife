@@ -1,0 +1,5 @@
+pkg-resources==0.0.0
+pycodestyle==2.5.0
+pydocstyle==4.0.1
+pygame==1.9.6
+snowballstemmer==2.0.0
