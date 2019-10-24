@@ -53,7 +53,7 @@ class Mapper():
         self._drawBgLines()
         self.slots = []
         for slot in range(0, NUMBER_OF_TILES):
-            self.slots.append(Tile(random.choice(['grass', 'rock', 'water'])))
+            self.slots.append(Tile('grass'))
 
     def _pixels_to_index(self, pos):
         """DOCS."""
