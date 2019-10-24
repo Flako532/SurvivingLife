@@ -5,7 +5,7 @@ My Settings.
 """
 
 SCREEN_SIZE = (1081, 721)
-TABLE_SIZE = (108, 72)
+TABLE_SIZE = (27, 18)
 
 COLORS = {
     'black': (0, 0, 0),
@@ -20,4 +20,10 @@ GROUND_TYPE = {
     'rock': COLORS['rock-gray'],
     'water': COLORS['water-blue'],
     'grass': COLORS['grass-green']
+}
+
+GROUND_PERCENTAGE = {
+    'rock': 0.3,
+    'water': 0.2,
+    'grass': 0.5
 }

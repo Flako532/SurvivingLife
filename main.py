@@ -26,8 +26,10 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            gameMode.world.change_tile_color(event.pos)
 
     gameMode.world.update()
-    time.sleep(1.5)
+    time.sleep(0.75)
     screen.blit(gameMode.world.get_surface(), (0, 0))
     pygame.display.flip()
