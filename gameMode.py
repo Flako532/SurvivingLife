@@ -43,6 +43,10 @@ class Tile():
         elif self.groundType == 'grass':
             self.groundType = 'rock'
 
+    def force_color(self, gt):
+        """Docs."""
+        self.groundType = gt
+
 
 class Mapper():
     """Builds the entire map."""
@@ -126,6 +130,26 @@ class Mapper():
             slot.update()
         self._draw_tiles()
         self._drawBgLines()
+
+    def save_map(self):
+        """Docs."""
+        import json
+        saveFile = open('maps/testmap.json', 'w')
+        data = {}
+        for index in range(0, len(self.slots)):
+            data[str(index)] = self.slots[index].groundType
+        json_data = json.dumps(data)
+        saveFile.write(json_data)
+        saveFile.close()
+        print('File Saved')
+
+    def load_map(self):
+        """Docs."""
+        import json
+        with open('maps/testmap.json', 'r') as mapFile:
+            json_data = json.loads(mapFile.read())
+            for index in json_data:
+                self.slots[int(index)].force_color(json_data[index])
 
 
 class GameMode():

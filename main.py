@@ -28,6 +28,11 @@ while 1:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             gameMode.world.change_tile_color(event.pos)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                gameMode.world.save_map()
+            if event.key == pygame.K_a:
+                gameMode.world.load_map()
 
     gameMode.world.update()
     time.sleep(0.75)
