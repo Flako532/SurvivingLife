@@ -9,7 +9,8 @@ import pygame
 import sys
 import time
 import settings
-from gameMode import GameMode, Tile
+from gameMode import GameMode
+from gameObjects import GameObject
 
 
 pygame.init()
@@ -21,6 +22,7 @@ screen = pygame.display.set_mode(settings.SCREEN_SIZE)
 
 gameMode = GameMode()
 screen.blit(gameMode.world.get_surface(), (0, 0))
+gameMode.startGame()
 
 while 1:
     for event in pygame.event.get():
@@ -35,6 +37,6 @@ while 1:
                 gameMode.world.load_map()
 
     gameMode.world.update()
-    time.sleep(0.75)
+    # time.sleep(0.75)
     screen.blit(gameMode.world.get_surface(), (0, 0))
     pygame.display.flip()

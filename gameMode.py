@@ -6,6 +6,7 @@ Lorem Ipsum.
 import pygame
 import settings
 import random
+from gameObjects import Worker
 
 TILE_WIDTH = (settings.SCREEN_SIZE[0]-1)/settings.TABLE_SIZE[0]
 TILE_HEIGHT = (settings.SCREEN_SIZE[1]-1)/settings.TABLE_SIZE[1]
@@ -33,6 +34,8 @@ class Tile():
     def update(self):
         """Docs."""
         self.surface.fill(settings.GROUND_TYPE[self.groundType])
+        if self.gameObject is not None:
+            self.surface.blit(self.gameObject.surface, (0, 0))
 
     def change_color(self):
         """Docstring."""
@@ -47,6 +50,10 @@ class Tile():
         """Docs."""
         self.groundType = gt
 
+    def receive_object(self, obj):
+        """Docs."""
+        self.gameObject = obj
+
 
 class Mapper():
     """Builds the entire map."""
@@ -59,11 +66,14 @@ class Mapper():
         for slot in range(0, NUMBER_OF_TILES):
             self.slots.append(Tile('grass'))
 
+    def _coordinates_to_index(self, coordinates):
+        return coordinates[0] + coordinates[1] * settings.TABLE_SIZE[0]
+
     def _pixels_to_index(self, pos):
         """DOCS."""
         x_coordinate = int(pos[0] / TILE_WIDTH)
         y_coordinate = int(pos[1] / TILE_HEIGHT)
-        index = x_coordinate + y_coordinate * settings.TABLE_SIZE[0]
+        index = self._coordinates_to_index((x_coordinate, y_coordinate))
         return index
 
     def _coordinates_to_pixels(self, x, y):
@@ -106,12 +116,12 @@ class Mapper():
     def _draw_tiles(self):
         """Docs."""
         for index in range(0, len(self.slots)):
-            coordinatess = self._coordinates_to_pixels(
+            coordinates = self._coordinates_to_pixels(
                 index % settings.TABLE_SIZE[0],
                 int(index / settings.TABLE_SIZE[0]))
             self.background.blit(
                 self.slots[index].surface,
-                (coordinatess[0], coordinatess[1]))
+                (coordinates[0], coordinates[1]))
 
     def get_surface(self):
         """Get surface."""
@@ -122,6 +132,11 @@ class Mapper():
         # ex pos. (425, 129)
         index = self._pixels_to_index(pos)
         self.slots[index].change_color()
+
+    def spawn_object(self, obj, coordinates):
+        """Docs."""
+        index = self._coordinates_to_index(coordinates)
+        self.slots[index].receive_object(obj)
 
     def update(self):
         """Docs."""
@@ -158,3 +173,11 @@ class GameMode():
     def __init__(self):
         """Docstring."""
         self.world = Mapper()
+
+    def startGame(self):
+        """Docs."""
+        self.world.load_map()
+        worker = Worker()
+        self.world.spawn_object(
+            worker,
+            (settings.TABLE_SIZE[0]-5, settings.TABLE_SIZE[1]-15))

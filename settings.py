@@ -13,7 +13,8 @@ COLORS = {
     'bg-gray': (120, 120, 120),
     'rock-gray': (70, 65, 65),
     'water-blue': (43, 43, 215),
-    'grass-green': (8, 125, 0)
+    'grass-green': (8, 125, 0),
+    'pink': (219, 40, 210)
 }
 
 GROUND_TYPE = {
