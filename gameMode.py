@@ -35,3 +35,22 @@ class GameMode():
     def quit(self):
         """Docs."""
         self.running = False
+
+    def mouse_action(self, event):
+        """Docs."""
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.controller.mouse_button_down(
+                self.world,
+                event.button,
+                event.pos)
+        if event.type == pygame.MOUSEBUTTONUP:
+            self.controller.mouse_button_up(
+                self.world,
+                event.button,
+                event.pos)
+        if event.type == pygame.MOUSEMOTION:
+            self.controller.mouse_motion(
+                self.world,
+                event.buttons,
+                event.pos,
+                event.rel)
