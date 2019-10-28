@@ -5,10 +5,18 @@ Docs
 """
 
 
-class ClassName(object):
+class Controller():
     """docstring for ClassName."""
 
-    def __init__(self, arg):
+    def __init__(self):
         """Docs."""
-        super(ClassName, self).__init__()
-        self.arg = arg
+        self.selection = []
+
+    def on_mouse_left_click():
+        """Docs."""
+        pass
+
+    def on_mouse_right_click():
+        """Docs."""
+        for item in self.selection:
+            self.selection.remove(item)
