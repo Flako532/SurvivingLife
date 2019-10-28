@@ -26,31 +26,34 @@ gameMode.startGame()
 
 clock = pygame.time.Clock()
 
-running = True
+gameMode.running = True
 
-while running:
+while gameMode.running:
+    # For every event
     for event in pygame.event.get():
+        # Quit event
         if event.type == pygame.QUIT:
-            running = False
+            gameMode.quit()
 
+        # Mouse Events
         if event.type == pygame.MOUSEBUTTONDOWN:
-            gameMode.control.mouse_button_down(event.button, event.pos)
+            gameMode.controller.mouse_button_down(event.button, event.pos)
         if event.type == pygame.MOUSEBUTTONUP:
-            gameMode.control.mouse_button_up(event.button, event.pos)
+            gameMode.controller.mouse_button_up(event.button, event.pos)
         if event.type == pygame.MOUSEMOTION:
-            gameMode.control.mouse_motion(event.pos)
+            gameMode.controller.mouse_motion(event.pos, event.rel, event.buttons)
 
+        # Keyboard Event
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 gameMode.world.save_map()
             if event.key == pygame.K_a:
                 gameMode.world.load_map()
 
-    gameMode.world.update()
-    # time.sleep(0.75)
+    # Update graphics
+    gameMode.update_all()
     screen.blit(gameMode.world.get_surface(), (0, 0))
     pygame.display.flip()
-
     clock.tick(FPS)
 
 pygame.quit()

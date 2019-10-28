@@ -7,6 +7,8 @@ import pygame
 import settings
 import random
 from gameObjects import Worker
+from mapper import Mapper
+from controller import Controller
 
 
 class GameMode():
@@ -15,6 +17,8 @@ class GameMode():
     def __init__(self):
         """Docstring."""
         self.world = Mapper()
+        self.controller = Controller()
+        self.running = False
 
     def startGame(self):
         """Docs."""
@@ -23,3 +27,11 @@ class GameMode():
         self.world.spawn_object(
             worker,
             (settings.TABLE_SIZE[0]-5, settings.TABLE_SIZE[1]-15))
+
+    def update_all(self):
+        """Docs."""
+        self.world.update()
+
+    def quit(self):
+        """Docs."""
+        self.running = False
