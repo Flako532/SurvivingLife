@@ -20,6 +20,10 @@ class Tile():
         size = (
             TILE_WIDTH,
             TILE_HEIGHT)
+        self.select = {
+            'tile': False,
+            'object': False
+        }
         self.surface = pygame.Surface(size)
         self.groundType = gt
         self.surface.fill(settings.GROUND_TYPE[self.groundType])
@@ -35,6 +39,30 @@ class Tile():
         self.surface.fill(settings.GROUND_TYPE[self.groundType])
         if self.gameObject is not None:
             self.surface.blit(self.gameObject.surface, (0, 0))
+        if self.select['tile']:
+            selection_surface = pygame.Surface(
+                self.surface.get_size(),
+                pygame.SRCALPHA,
+                32)
+            self.surface = self.surface.convert_alpha()
+            pygame.draw.lines(
+                selection_surface,
+                settings.COLORS['black'],
+                True,
+                [(1, 1),
+                 (1, selection_surface.get_size()[1]-1),
+                 (selection_surface.get_size()[0]-1,
+                    selection_surface.get_size()[1]-1),
+                 (selection_surface.get_size()[0]-1, 1)])
+            self.surface.blit(selection_surface, (0, 0))
+
+    def select_tile(self):
+        """Docs."""
+        self.select['tile'] = True
+
+    def deselect_tile(self):
+        """Docs."""
+        self.select['tile'] = False
 
     def change_color(self):
         """Docstring."""
@@ -122,9 +150,20 @@ class Mapper():
                 self.slots[index].surface,
                 (coordinates[0], coordinates[1]))
 
-    def get_tile(self, mousePos):
+    def get_tile_by_pixels(self, mousePos):
         """Docs."""
-        return self.slots[self._coordinates_to_index(mousePos)]
+        index = self._pixels_to_index(mousePos)
+        return self.slots[index]
+
+    def select_tile(self, tile):
+        """Docs."""
+        index = self.slots.index(tile)
+        self.slots[index].select_tile()
+
+    def deselect_tile(self, tile):
+        """Docs."""
+        index = self.slots.index(tile)
+        self.slots[index].deselect_tile()
 
     def get_surface(self):
         """Get surface."""
