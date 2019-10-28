@@ -4,6 +4,9 @@ Docs.
 Docs.
 """
 
+import pygame
+import settings
+
 TILE_WIDTH = (settings.SCREEN_SIZE[0]-1)/settings.TABLE_SIZE[0]
 TILE_HEIGHT = (settings.SCREEN_SIZE[1]-1)/settings.TABLE_SIZE[1]
 NUMBER_OF_TILES = settings.TABLE_SIZE[0]*settings.TABLE_SIZE[1]
@@ -118,6 +121,10 @@ class Mapper():
             self.background.blit(
                 self.slots[index].surface,
                 (coordinates[0], coordinates[1]))
+
+    def get_tile(self, mousePos):
+        """Docs."""
+        return self.slots[self._coordinates_to_index(mousePos)]
 
     def get_surface(self):
         """Get surface."""
