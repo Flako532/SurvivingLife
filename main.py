@@ -36,12 +36,7 @@ while gameMode.running:
             gameMode.quit()
 
         # Mouse Events
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            gameMode.controller.mouse_button_down(event.button, event.pos)
-        if event.type == pygame.MOUSEBUTTONUP:
-            gameMode.controller.mouse_button_up(event.button, event.pos)
-        if event.type == pygame.MOUSEMOTION:
-            gameMode.controller.mouse_motion(event.pos, event.rel, event.buttons)
+        gameMode.mouse_action(event)
 
         # Keyboard Event
         if event.type == pygame.KEYDOWN:
