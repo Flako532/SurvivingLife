@@ -15,21 +15,31 @@ from gameObjects import GameObject
 
 pygame.init()
 
-speed = [2, 2]
-black = 0, 0, 0
+FPS = 30
+TOP_LEFT_CORNER = (0, 0)
 
 screen = pygame.display.set_mode(settings.SCREEN_SIZE)
 
 gameMode = GameMode()
-screen.blit(gameMode.world.get_surface(), (0, 0))
+screen.blit(gameMode.world.get_surface(), TOP_LEFT_CORNER)
 gameMode.startGame()
 
-while 1:
+clock = pygame.time.Clock()
+
+running = True
+
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit()
+            running = False
+
         if event.type == pygame.MOUSEBUTTONDOWN:
-            gameMode.world.change_tile_color(event.pos)
+            gameMode.control.mouse_button_down(event.button, event.pos)
+        if event.type == pygame.MOUSEBUTTONUP:
+            gameMode.control.mouse_button_up(event.button, event.pos)
+        if event.type == pygame.MOUSEMOTION:
+            gameMode.control.mouse_motion(event.pos)
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 gameMode.world.save_map()
@@ -40,3 +50,7 @@ while 1:
     # time.sleep(0.75)
     screen.blit(gameMode.world.get_surface(), (0, 0))
     pygame.display.flip()
+
+    clock.tick(FPS)
+
+pygame.quit()
