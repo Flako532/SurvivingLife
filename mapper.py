@@ -20,10 +20,8 @@ class Tile():
         size = (
             TILE_WIDTH,
             TILE_HEIGHT)
-        self.select = {
-            'tile': False,
-            'object': False
-        }
+        self.selectTile = False
+        self.selectObject = False
         self.surface = pygame.Surface(size)
         self.groundType = gt
         self.surface.fill(settings.GROUND_TYPE[self.groundType])
@@ -39,7 +37,8 @@ class Tile():
         self.surface.fill(settings.GROUND_TYPE[self.groundType])
         if self.gameObject is not None:
             self.surface.blit(self.gameObject.surface, (0, 0))
-        if self.select['tile']:
+        # Select Drawing
+        if self.selectTile:
             selection_surface = pygame.Surface(
                 self.surface.get_size(),
                 pygame.SRCALPHA,
@@ -55,23 +54,42 @@ class Tile():
                     selection_surface.get_size()[1]-1),
                  (selection_surface.get_size()[0]-1, 1)])
             self.surface.blit(selection_surface, (0, 0))
+        if self.selectObject:
+            selection_surface = pygame.Surface(
+                self.surface.get_size(),
+                pygame.SRCALPHA,
+                32)
+            self.surface = self.surface.convert_alpha()
+            center = (int(selection_surface.get_size()[1]/2), int(selection_surface.get_size()[0]/2))
+            radius = int((selection_surface.get_size()[0]/2)-selection_surface.get_size()[0]*0.15)
+            pygame.draw.circle(
+                selection_surface,
+                settings.COLORS['white'],
+                center,
+                radius,
+                1)
+            self.surface.blit(selection_surface, (0, 0))
 
-    def select_tile(self):
+    def select(self):
+        if self.gameObject:
+            self.selectObject = True
+        else:
+            self.selectTile = True
+
+    def change_selection(self):
         """Docs."""
-        self.select['tile'] = True
+        if self.gameObject:
+            if self.selectTile and not self.selectObject:
+                self.selectTile = False
+                self.selectObject = True
+            elif self.selectObject and not self.selectTile:
+                self.selectTile = True
+                self.selectObject = False
 
-    def deselect_tile(self):
+    def deselect(self):
         """Docs."""
-        self.select['tile'] = False
-
-    def change_color(self):
-        """Docstring."""
-        if self.groundType == 'rock':
-            self.groundType = 'water'
-        elif self.groundType == 'water':
-            self.groundType = 'grass'
-        elif self.groundType == 'grass':
-            self.groundType = 'rock'
+        self.selectTile = False
+        self.selectObject = False
 
     def force_color(self, gt):
         """Docs."""
@@ -158,22 +176,21 @@ class Mapper():
     def select_tile(self, tile):
         """Docs."""
         index = self.slots.index(tile)
-        self.slots[index].select_tile()
+        return self.slots[index].select()
 
-    def deselect_tile(self, tile):
+    def clear_selection(self):
         """Docs."""
-        index = self.slots.index(tile)
-        self.slots[index].deselect_tile()
+        for tile in self.slots:
+            tile.deselect()
 
     def get_surface(self):
         """Get surface."""
         return self.background
 
-    def change_tile_color(self, pos):
+    def change_tile_selection(self, tile):
         """DOCS."""
-        # ex pos. (425, 129)
-        index = self._pixels_to_index(pos)
-        self.slots[index].change_color()
+        index = self.slots.index(tile)
+        self.slots[index].change_selection()
 
     def spawn_object(self, obj, coordinates):
         """Docs."""
