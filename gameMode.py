@@ -16,6 +16,7 @@ class GameMode():
 
     def __init__(self):
         """Docstring."""
+        self.gameScreen = pygame.Surface(settings.SCREEN_SIZE)
         self.world = Mapper()
         self.controller = Controller()
         self.running = False
@@ -31,6 +32,7 @@ class GameMode():
     def update_all(self):
         """Docs."""
         self.world.update()
+        self.gameScreen.blit(self.world.get_surface(), (0, 0))
 
     def quit(self):
         """Docs."""
@@ -54,3 +56,14 @@ class GameMode():
                 event.buttons,
                 event.pos,
                 event.rel)
+
+    def save(self):
+        """Docs."""
+        self.world.save_map()
+
+    def laod(self):
+        """Docs."""
+        self.world.load_map()
+
+    def get_game_screen(self):
+        return self.gameScreen

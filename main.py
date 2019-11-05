@@ -41,13 +41,13 @@ while gameMode.running:
         # Keyboard Event
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
-                gameMode.world.save_map()
+                gameMode.save()
             if event.key == pygame.K_a:
-                gameMode.world.load_map()
+                gameMode.load()
 
     # Update graphics
     gameMode.update_all()
-    screen.blit(gameMode.world.get_surface(), (0, 0))
+    screen.blit(gameMode.get_game_screen(), (0, 0))
     pygame.display.flip()
     clock.tick(FPS)
 
