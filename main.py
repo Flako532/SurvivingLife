@@ -28,8 +28,6 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            gameMode.world.change_tile_color(event.pos)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 gameMode.world.save_map()

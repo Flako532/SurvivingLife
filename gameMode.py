@@ -173,6 +173,7 @@ class GameMode():
     def __init__(self):
         """Docstring."""
         self.world = Mapper()
+        self.turnTime = settings.TURN_TIME
 
     def startGame(self):
         """Docs."""
