@@ -4,7 +4,7 @@ Settings.
 My Settings.
 """
 
-SCREEN_SIZE = (1081, 721)
+SCREEN_SIZE = (1921, 1081)
 TABLE_SIZE = (27, 18)
 
 COLORS = {
