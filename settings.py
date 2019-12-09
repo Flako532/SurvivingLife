@@ -15,7 +15,8 @@ COLORS = {
     'water-blue': (43, 43, 215),
     'grass-green': (8, 125, 0),
     'pink': (219, 40, 210),
-    'brown': (165, 42, 42)
+    'brown': (165, 42, 42),
+    'green-ish': (17, 233, 161)
 }
 
 GROUND_TYPE = {
