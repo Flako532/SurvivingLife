@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="Surviving Life"
+run/main_scene="res://Scenes/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+InputSystem="*res://Scripts/Global/InputSystem.gd"
 
 [physics]
 
