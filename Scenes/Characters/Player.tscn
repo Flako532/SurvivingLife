@@ -173,15 +173,15 @@ animations = [ {
 "name": "Slash",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 73 ), ExtResource( 61 ), ExtResource( 74 ), ExtResource( 79 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 4 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 17 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 30 ), ExtResource( 25 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 150 ), ExtResource( 142 ), ExtResource( 146 ), ExtResource( 143 ), ExtResource( 144 ), ExtResource( 145 ), ExtResource( 148 ), ExtResource( 140 ), ExtResource( 147 ), ExtResource( 149 ), ExtResource( 151 ), ExtResource( 153 ), ExtResource( 152 ), ExtResource( 141 ), ExtResource( 154 ), ExtResource( 155 ), ExtResource( 139 ) ],
-"loop": true,
-"name": "Thrust",
-"speed": 24.0
-}, {
 "frames": [ ExtResource( 156 ), ExtResource( 45 ), ExtResource( 47 ), ExtResource( 43 ), ExtResource( 50 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 42 ), ExtResource( 41 ), ExtResource( 46 ), ExtResource( 51 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 44 ), ExtResource( 131 ), ExtResource( 132 ), ExtResource( 138 ) ],
 "loop": true,
 "name": "Run",
 "speed": 18.0
+}, {
+"frames": [ ExtResource( 73 ), ExtResource( 61 ), ExtResource( 74 ), ExtResource( 79 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 4 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 17 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 30 ), ExtResource( 25 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 150 ), ExtResource( 142 ), ExtResource( 146 ), ExtResource( 143 ), ExtResource( 144 ), ExtResource( 145 ), ExtResource( 148 ), ExtResource( 140 ), ExtResource( 147 ), ExtResource( 149 ), ExtResource( 151 ), ExtResource( 153 ), ExtResource( 152 ), ExtResource( 141 ), ExtResource( 154 ), ExtResource( 155 ), ExtResource( 139 ) ],
+"loop": true,
+"name": "Thrust",
+"speed": 24.0
 } ]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -194,5 +194,5 @@ shape = SubResource( 1 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 2 )
 animation = "Run"
-frame = 1
+frame = 20
 playing = true

@@ -16,7 +16,7 @@ func _process(delta):
 func get_input_direction():
 	var horizontal = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	var vertical = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	return Vector2(horizontal, vertical if horizontal == 0 else 0)
+	return Vector2(horizontal, vertical)
 
 
 func get_input_activation():
