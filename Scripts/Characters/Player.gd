@@ -6,6 +6,8 @@ func _physics_process(delta):
 #		activate_object()
 	if InputSystem.input_direction:
 		move_to(InputSystem.input_direction, delta)
+	else:
+		character_idle()
 
 
 

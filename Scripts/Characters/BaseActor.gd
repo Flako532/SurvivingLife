@@ -1,45 +1,20 @@
 extends KinematicBody2D
 
-# onready var sprite = $Pivot/Sprite
-export var speed = 20000
+onready var sprite = $Sprite
+export var speed = 200
 
 var velocity = Vector2()
 
 func _ready():
-	pass
+	sprite.set_animation("Idle")
+
+func character_idle():
+	sprite.set_animation("Idle")
 
 func move_to(target_dir, delta):
-	velocity = move_and_slide(target_dir * delta * speed)	
-# Smoothly moves actor to target position
-#func move_to(target_position):
-#	pass
-#	# Begin movement. Actor is non-interactive while moving.
-##	set_process(false)
-##	process_movement_animation()
-#
-#	# Move the node to the target cell instantly,
-#	# and animate the sprite moving from the start to the target cell
-#	var move_direction = (target_position - position).normalized()
-#	var current_pos = - move_direction * overworld.cell_size
-#	# Keep the pivot where it is, because we are about to move the whole
-#	# transform and it will cause a glitchy animation where the sprite warps
-#	# for a single frame to the target location (with the transform) and then
-#	# smoothly animates after
-#	$Pivot.position = current_pos
-#	# Move the pivot point from the current position to 0,0
-#	# (relative to parent transform) basically just catch up with the parent
-#	$Tween.interpolate_property($Pivot, "position", current_pos, Vector2(),
-#			$AnimationPlayer.current_animation_length, Tween.TRANS_LINEAR,
-#			Tween.EASE_IN)
-#	position = target_position
-#	# This is basically a "sort y order" option for children (non-cells)
-#	set_z_index(position.y)
-#	$Tween.start()
-#
-#	# Stop the function execution until the animation finished
-#	yield($AnimationPlayer, "animation_finished")
-#	# Movement complete. Actor is again "interactive"
-#	set_process(true)
+	update_facing(target_dir)
+	sprite.set_animation("Run")
+	velocity = move_and_slide(target_dir * speed)	
 
 #func _ready():	
 #	# Set up z index here and simply match it to the y value
@@ -61,24 +36,16 @@ func move_to(target_dir, delta):
 #		bump()
 
 
-## Change how the character is facing.
-#func update_facing(direction):
-#	if direction.x == 1:
-#		sprite.flip_h = false
-#		sprite.frame = horiz_frame
-#		dir = DIR.RIGHT
-#	elif direction.x == -1:
+# Change how the character is facing.
+func update_facing(direction):
+	if direction.x == 1:  # Derecha
+		sprite.flip_h = false
+	elif direction.x == -1:  # Izquierda
+		sprite.flip_h = true
+#	elif direction.y == 1:  # Abajo
 #		sprite.flip_h = true
-#		sprite.frame = horiz_frame
-#		dir = DIR.LEFT
-#	elif direction.y == 1:
+#	elif direction.y == -1:  # Arriba
 #		sprite.flip_h = false
-#		sprite.frame = down_frame
-#		dir = DIR.DOWN
-#	elif direction.y == -1:
-#		sprite.flip_h = false
-#		sprite.frame = up_frame
-#		dir = DIR.UP
 
 
 # Define what an actor should do if it is interacted with in the child class.
