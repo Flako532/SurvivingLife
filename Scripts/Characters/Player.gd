@@ -7,7 +7,7 @@ onready var animState = animTree.get("parameters/playback")
 export var MAX_SPEED = 120
 export var ROLL_SPEED = 150
 export var ACCELERATION = 150
-export var FRICTION = 250
+export var FRICTION = 350
 
 
 enum STATES {MOVE, ROLL}

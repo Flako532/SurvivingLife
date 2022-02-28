@@ -637,20 +637,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_roll_animation_finished"
-} ]
-}
 
 [sub_resource type="Animation" id=22]
 resource_name = "run_left"
@@ -805,10 +791,10 @@ animation = "idle_right"
 animation = "idle_up"
 
 [sub_resource type="AnimationNodeAnimation" id=37]
-animation = "roll_down_left"
+animation = "idle_down_left"
 
 [sub_resource type="AnimationNodeAnimation" id=38]
-animation = "roll_down_right"
+animation = "idle_down_right"
 
 [sub_resource type="AnimationNodeAnimation" id=39]
 animation = "idle_up_right"
@@ -820,19 +806,19 @@ animation = "idle_up_left"
 blend_point_0/node = SubResource( 33 )
 blend_point_0/pos = Vector2( -1, 0 )
 blend_point_1/node = SubResource( 34 )
-blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_1/pos = Vector2( 0, 1 )
 blend_point_2/node = SubResource( 35 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 36 )
-blend_point_3/pos = Vector2( 0, -1.1 )
+blend_point_3/pos = Vector2( 0, -1 )
 blend_point_4/node = SubResource( 37 )
-blend_point_4/pos = Vector2( -0.9, 1 )
+blend_point_4/pos = Vector2( -1, 1 )
 blend_point_5/node = SubResource( 38 )
-blend_point_5/pos = Vector2( 0.9, 1 )
+blend_point_5/pos = Vector2( 1, 1 )
 blend_point_6/node = SubResource( 39 )
-blend_point_6/pos = Vector2( 0.9, -1 )
+blend_point_6/pos = Vector2( 1, -1 )
 blend_point_7/node = SubResource( 40 )
-blend_point_7/pos = Vector2( -0.9, -1 )
+blend_point_7/pos = Vector2( -1, -1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
@@ -867,19 +853,20 @@ blend_point_0/pos = Vector2( -1, 0 )
 blend_point_1/node = SubResource( 56 )
 blend_point_1/pos = Vector2( 1, 0 )
 blend_point_2/node = SubResource( 57 )
-blend_point_2/pos = Vector2( 0, -1.1 )
+blend_point_2/pos = Vector2( 0, -1 )
 blend_point_3/node = SubResource( 58 )
-blend_point_3/pos = Vector2( -0.9, -1 )
+blend_point_3/pos = Vector2( -1, -1 )
 blend_point_4/node = SubResource( 59 )
-blend_point_4/pos = Vector2( 0.9, -1 )
+blend_point_4/pos = Vector2( 1, -1 )
 blend_point_5/node = SubResource( 60 )
-blend_point_5/pos = Vector2( -0.9, 1 )
+blend_point_5/pos = Vector2( -1, 1 )
 blend_point_6/node = SubResource( 61 )
-blend_point_6/pos = Vector2( 0, 1.1 )
+blend_point_6/pos = Vector2( 0, 1 )
 blend_point_7/node = SubResource( 62 )
-blend_point_7/pos = Vector2( 0.9, 1 )
+blend_point_7/pos = Vector2( 1, 1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=42]
 animation = "run_left"
@@ -910,19 +897,19 @@ auto_triangles = false
 blend_point_0/node = SubResource( 42 )
 blend_point_0/pos = Vector2( -1, 0 )
 blend_point_1/node = SubResource( 43 )
-blend_point_1/pos = Vector2( -0.9, -1 )
+blend_point_1/pos = Vector2( -1, -1 )
 blend_point_2/node = SubResource( 44 )
 blend_point_2/pos = Vector2( 0, -1.1 )
 blend_point_3/node = SubResource( 45 )
-blend_point_3/pos = Vector2( 0.9, -1 )
+blend_point_3/pos = Vector2( 1, -1 )
 blend_point_4/node = SubResource( 46 )
 blend_point_4/pos = Vector2( 1, 0 )
 blend_point_5/node = SubResource( 47 )
-blend_point_5/pos = Vector2( 0.9, 1 )
+blend_point_5/pos = Vector2( 1, 1 )
 blend_point_6/node = SubResource( 48 )
-blend_point_6/pos = Vector2( 0, 1.1 )
+blend_point_6/pos = Vector2( 0, 1 )
 blend_point_7/node = SubResource( 49 )
-blend_point_7/pos = Vector2( -0.9, 1 )
+blend_point_7/pos = Vector2( -1, 1 )
 triangles = PoolIntArray( 0, 1, 2, 0, 2, 4, 2, 3, 4, 0, 4, 6, 4, 5, 6, 0, 6, 7 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
