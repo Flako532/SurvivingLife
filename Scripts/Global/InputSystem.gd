@@ -1,7 +1,7 @@
 extends Node
 
-var input_direction
-var input_activation
+var input_direction = Vector2.ZERO
+var input_roll
 
 func _ready():
 	# Do not disable this when game is paused
@@ -10,7 +10,7 @@ func _ready():
 
 func _process(delta):
 	input_direction = get_input_direction()
-	input_activation = get_input_activation()
+	input_roll = get_input_roll()
 
 
 func get_input_direction():
@@ -19,8 +19,8 @@ func get_input_direction():
 	return Vector2(horizontal, vertical)
 
 
-func get_input_activation():
-	return Input.is_action_just_pressed("ui_accept")
+func get_input_roll():
+	return Input.is_action_just_pressed("ui_roll")
 
 
 # Extremely useful for things like stopping "interact" from looping
@@ -28,7 +28,7 @@ func get_input_activation():
 # It would also, on the same frame, trigger interact again
 func neutralize_inputs():
 	input_direction = null
-	input_activation = null
+	input_roll = null
 
 
 # Give other systems the ability to disable ALL input until a given trigger

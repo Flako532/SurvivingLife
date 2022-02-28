@@ -1,19 +1,61 @@
-extends "res://Scripts/Characters/BaseActor.gd"
+extends KinematicBody2D
 
+onready var debug = $Debug
+onready var animPlayer = $AnimationPlayer
+onready var animTree = $AnimationTree
+onready var animState = animTree.get("parameters/playback")
+export var MAX_SPEED = 150
+export var ROLL_SPEED = 200
+export var ACCELERATION = 150
+export var FRICTION = 250
+
+
+enum STATES {MOVE, ROLL}
+
+var state = STATES.MOVE
+var velocity = Vector2()
+var roll_vector = Vector2.DOWN
+
+
+func _process(delta):
+	debug.text = str(state)
+	
 
 func _physics_process(delta):
-#	if InputSystem.input_activation:
-#		activate_object()
-	if InputSystem.input_direction:
-		move_to(InputSystem.input_direction, delta)
+	match state:
+		STATES.MOVE:
+			move_state(delta)
+		STATES.ROLL:
+			roll_state(delta)
+		
+func _on_roll_animation_finished():
+	state = STATES.MOVE
+
+func move_state(delta):
+	var input_vector = InputSystem.input_direction
+	
+	# Movimiento
+	if input_vector != Vector2.ZERO:
+		roll_vector = input_vector
+		animTree.set("parameters/Idle/blend_position", input_vector)
+		animTree.set("parameters/Run/blend_position", input_vector)
+		animTree.set("parameters/Roll/blend_position", input_vector)
+		animState.travel("Run")
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-		character_idle()
+		animState.travel("Idle")
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		
+	move()
+	
+	if InputSystem.input_roll:
+		state = STATES.ROLL
+	
 
-
-
-# Make a vector of the direction we're facing, then ask the grid to interact
-# with whatever is there
-#func activate_object():
-#	var direction_of_interaction = Vector2((int(dir == DIR.RIGHT) - int(
-#			dir == DIR.LEFT)), (int(dir == DIR.DOWN) - int(dir == DIR.UP)))
-#	overworld.request_interaction(self, direction_of_interaction)
+func roll_state(delta):
+	velocity = roll_vector * ROLL_SPEED
+	animState.travel("Roll")
+	move()
+	
+func move():
+	velocity = move_and_slide(velocity)
