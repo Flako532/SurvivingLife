@@ -4,8 +4,8 @@ onready var debug = $Debug
 onready var animPlayer = $AnimationPlayer
 onready var animTree = $AnimationTree
 onready var animState = animTree.get("parameters/playback")
-export var MAX_SPEED = 150
-export var ROLL_SPEED = 200
+export var MAX_SPEED = 120
+export var ROLL_SPEED = 150
 export var ACCELERATION = 150
 export var FRICTION = 250
 

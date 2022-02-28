@@ -557,6 +557,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=19]
 resource_name = "run_down"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
 tracks/0/interp = 1
@@ -612,7 +613,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=21]
 resource_name = "run_down_right"
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
 tracks/0/interp = 1
@@ -636,6 +636,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_roll_animation_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -778,9 +792,6 @@ tracks/1/keys = {
 "values": [ ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=8]
-radius = 14.0011
-
 [sub_resource type="AnimationNodeAnimation" id=33]
 animation = "idle_left"
 
@@ -880,7 +891,7 @@ animation = "run_up_left"
 animation = "run_up"
 
 [sub_resource type="AnimationNodeAnimation" id=45]
-animation = "roll_up_right"
+animation = "run_up_right"
 
 [sub_resource type="AnimationNodeAnimation" id=46]
 animation = "run_right"
@@ -938,6 +949,9 @@ graph_offset = Vector2( -16, 33 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 14.0011
+
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 157 )
 
@@ -967,16 +981,23 @@ anims/run_up = SubResource( 24 )
 anims/run_up_left = SubResource( 25 )
 anims/run_up_right = SubResource( 26 )
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 53 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 54 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Roll/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4.823 )
 shape = SubResource( 8 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
-animation = "idle_2"
+animation = "idle_4"
 playing = true
 
 [node name="Debug" type="Label" parent="."]
@@ -989,12 +1010,3 @@ text = "asdf"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 53 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 54 )
-parameters/Idle/blend_position = Vector2( -0.00702989, 1.10948 )
-parameters/Roll/blend_position = Vector2( 0, 0 )
-parameters/Run/blend_position = Vector2( 0.727592, 0.0568966 )
