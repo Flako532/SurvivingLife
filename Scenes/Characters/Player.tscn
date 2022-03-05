@@ -1,6 +1,8 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Assets/Characters/Player/Player.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/Modules/health_mod.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Modules/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=157]
 
 [sub_resource type="Animation" id=9]
@@ -937,9 +939,13 @@ graph_offset = Vector2( -16, 33 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
 [sub_resource type="CircleShape2D" id=8]
-radius = 14.0011
+radius = 10.0019
+
+[sub_resource type="CircleShape2D" id=67]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 17
 script = ExtResource( 157 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -978,7 +984,7 @@ parameters/Roll/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4.823 )
+position = Vector2( 0, 12.197 )
 shape = SubResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -997,3 +1003,19 @@ text = "asdf"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+
+[node name="health_mod" parent="." instance=ExtResource( 2 )]
+
+[node name="HurtBox" parent="." instance=ExtResource( 4 )]
+collision_layer = 8
+collision_mask = 192
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -1, 3 )
+shape = SubResource( 67 )
+
+[editable path="HurtBox"]

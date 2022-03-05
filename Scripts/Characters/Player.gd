@@ -4,6 +4,8 @@ onready var debug = $Debug
 onready var animPlayer = $AnimationPlayer
 onready var animTree = $AnimationTree
 onready var animState = animTree.get("parameters/playback")
+onready var health = $health_mod
+onready var hurtbox = $HurtBox
 export var MAX_SPEED = 120
 export var ROLL_SPEED = 150
 export var ACCELERATION = 150
@@ -17,8 +19,17 @@ var velocity = Vector2()
 var roll_vector = Vector2.DOWN
 
 
+func _ready():
+	$"/root/Global".register_player(self)
+	health.connect("health_changed", self, "on_health_changed", [])
+	hurtbox.connect("area_entered", self, "on_hurtbox_collision", [])
+
 func _process(delta):
-	debug.text = str(state)
+	debug.text = """
+				State : {state}
+				Velocity : {vel} 
+				Health : {health}
+				""".format({"state": state, "vel": velocity, "health": health.get_health()})
 	
 
 func _physics_process(delta):
@@ -51,6 +62,9 @@ func move_state(delta):
 	if InputSystem.input_roll:
 		state = STATES.ROLL
 	
+	if InputSystem.input_action:
+		receive_damage(10)
+	
 
 func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED
@@ -59,3 +73,16 @@ func roll_state(delta):
 	
 func move():
 	velocity = move_and_slide(velocity)
+	
+func receive_damage(amount:float) -> void:
+	health.remove_health(amount)
+	
+func get_position():
+	return self.global_position
+
+func on_health_changed(new_health):
+	print("Player's new health is {amount}".format({"amount":new_health}))
+	
+func on_hurtbox_collision(area):
+	print("Player receive {dmg} damage".format({"dmg":area.dmg_amount}))
+	receive_damage(area.dmg_amount)
