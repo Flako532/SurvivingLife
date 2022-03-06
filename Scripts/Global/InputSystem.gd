@@ -3,6 +3,7 @@ extends Node
 var input_direction = Vector2.ZERO
 var input_roll
 var input_action
+var input_attack
 
 func _ready():
 	# Do not disable this when game is paused
@@ -13,8 +14,8 @@ func _process(delta):
 	input_direction = get_input_direction()
 	input_roll = get_input_roll()
 	input_action = get_input_action()
+	input_attack = get_input_attack()
 	
-
 
 func get_input_direction():
 	var horizontal = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
@@ -27,6 +28,9 @@ func get_input_roll():
 
 func get_input_action():
 	return Input.is_action_just_pressed("ui_select")
+	
+func get_input_attack():
+	return Input.is_action_just_pressed("ui_accept")
 
 # Extremely useful for things like stopping "interact" from looping
 # E.G. actor displays dialog, "interact" is the same button that closes dialog
